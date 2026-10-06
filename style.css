@@ -17,3 +17,7 @@ h1 {
     border-radius: 25px;
     text-align: center;
 }
+
+@media (max-width: 480px) {
+    .maindiv { width: auto; margin: 0 10px; }
+}
