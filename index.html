@@ -1,6 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="style.css">
         <title>Simple Interest Calculator</title>
     </head>
@@ -8,7 +10,7 @@
         <div class="maindiv">
             <h1>Simple Interest Calculator</h1>
 
-            Amount <input type="number"  id="principal">  <br/>
+            Amount <input type="number" id="principal" min="0" step="any">  <br/>
 
             Rate <input type="range" id="rate" min="1" max="20" value="10.25" step="0.25" onchange="updateRate()"> 
             <span id="rate_val">
@@ -16,7 +18,7 @@
             </span>% <br/>
 
             No. of Years 
-            <input type="number" id="years" list="all_years">
+            <input type="number" id="years" min="0" step="any" list="all_years">
             <datalist id="all_years">
                 <option value="1">1</option>
                 <option value="2">2</option>
@@ -36,10 +38,10 @@
         </div>
 
         <footer>
-            &#169; This Calculator belongs to --your name--
+            &#169; This Calculator belongs to Shishir Sharma
         </footer>
 
-    </body>
     <script src="script.js"></script>
+    </body>
 
 </html>
