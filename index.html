@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Finance Toolkit - Simple &amp; Compound Interest, EMI, SIP and FD Calculators</title>
+  <meta name="description" content="Free finance calculators: simple interest, compound interest, EMI with amortization table, SIP / recurring deposit and fixed deposit maturity. Interactive growth chart, history, CSV export and shareable links.">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#f4f6fb" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0b1020" media="(prefers-color-scheme: dark)">
+  <meta name="author" content="Shishir Sharma">
+  <link rel="canonical" href="https://shishir19999.github.io/Simple-interest-calculator/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Finance Toolkit - interest, loan and savings calculators">
+  <meta property="og:description" content="Simple and compound interest, EMI with amortization, SIP and FD calculators with an interactive growth chart.">
+  <meta property="og:url" content="https://shishir19999.github.io/Simple-interest-calculator/">
+  <meta property="og:site_name" content="Finance Toolkit">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Finance Toolkit - interest, loan and savings calculators">
+  <meta name="twitter:description" content="Simple and compound interest, EMI with amortization, SIP and FD calculators.">
+
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <script>
+    /* Apply the saved or system theme before first paint to avoid a flash. */
+    (function () {
+      var t = null;
+      try { t = localStorage.getItem('sic.theme'); } catch (e) {}
+      if (t !== 'light' && t !== 'dark') {
+        t = window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      }
+      document.documentElement.setAttribute('data-theme', t);
+      document.documentElement.classList.add('js');
+    })();
+  </script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to calculators</a>
+
+  <header class="site-header">
+    <div class="wrap header-row">
+      <a class="brand" href="./" aria-label="Finance Toolkit home">
+        <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="currentColor"/><path d="M7 22l6-7 4 4 8-10" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span>Finance Toolkit</span>
+      </a>
+      <div class="header-tools">
+        <div class="select-wrap">
+          <label for="currency" class="tool-label">Currency</label>
+          <select id="currency" class="control"></select>
+        </div>
+        <button type="button" id="theme" class="btn btn-icon" aria-label="Switch to dark theme" title="Toggle theme">
+          <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z" fill="currentColor"/></svg>
+          <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4.5" fill="currentColor"/><g stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/></g></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="hero-bg" data-parallax="0.18" aria-hidden="true"></div>
+    <div class="hero-orb hero-orb-a" data-parallax="0.32" aria-hidden="true"></div>
+    <div class="hero-orb hero-orb-b" data-parallax="0.12" aria-hidden="true"></div>
+    <div class="wrap hero-inner">
+      <p class="eyebrow">Interest, loans and savings</p>
+      <h1 id="hero-title">See where your money is heading</h1>
+      <p class="lead">Five calculators in one place. Adjust a slider, watch the growth chart respond, then save or share the result.</p>
+    </div>
+  </section>
+
+  <main id="main" class="wrap" tabindex="-1">
+    <noscript><p class="notice notice-error">This toolkit needs JavaScript to calculate. Please enable it and reload the page.</p></noscript>
+
+    <div class="tabs-scroll reveal">
+      <div role="tablist" id="tabs" aria-label="Calculators"></div>
+    </div>
+
+    <div id="panel" role="tabpanel" tabindex="-1" class="panel">
+      <section class="card form-card reveal" aria-labelledby="panel-title">
+        <h2 id="panel-title">Simple interest</h2>
+        <p id="panel-desc" class="muted"></p>
+        <form id="calc" novalidate autocomplete="off">
+          <div id="fields" class="fields"></div>
+          <div class="actions">
+            <button type="button" id="save" class="btn btn-primary">Save to history</button>
+            <button type="button" id="share" class="btn">Copy share link</button>
+            <button type="button" id="reset" class="btn btn-quiet">Reset</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="results" aria-label="Results">
+        <div id="sr-status" class="sr-only" role="status" aria-live="polite"></div>
+        <div id="error-box" class="notice notice-error" role="alert" hidden></div>
+
+        <div id="stats" class="stats reveal" aria-busy="true">
+          <div class="stat skeleton" aria-hidden="true"></div>
+          <div class="stat skeleton" aria-hidden="true"></div>
+          <div class="stat skeleton" aria-hidden="true"></div>
+        </div>
+        <p id="print-inputs" class="print-only"></p>
+        <p id="stat-note" class="muted note"></p>
+
+        <div class="card chart-card reveal">
+          <div class="card-head">
+            <h3>Growth over time</h3>
+            <ul id="legend" class="legend" aria-label="Chart legend"></ul>
+          </div>
+          <div id="chart" class="chart" tabindex="0" role="group" aria-label="Growth chart. Use left and right arrow keys to inspect each year."><div class="skeleton chart-skeleton"></div></div>
+        </div>
+
+        <div class="card table-card reveal">
+          <div class="card-head">
+            <h3 id="table-title">Year by year</h3>
+            <div class="actions actions-inline">
+              <button type="button" id="csv" class="btn">Export CSV</button>
+              <button type="button" id="print" class="btn">Print</button>
+            </div>
+          </div>
+          <div class="table-wrap" tabindex="0" role="region" aria-labelledby="table-title">
+            <table id="table"></table>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <section class="card history reveal" aria-labelledby="history-title">
+      <div class="card-head">
+        <h2 id="history-title">Calculation history</h2>
+        <button type="button" id="clear-history" class="btn btn-quiet" hidden>Clear all</button>
+      </div>
+      <p id="history-empty" class="empty">Nothing saved yet. Use "Save to history" after a calculation and it will appear here, stored only in this browser.</p>
+      <ul id="history-list" class="history-list"></ul>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>&#169; This calculator belongs to Shishir Sharma</p>
+      <p class="muted small">Results are estimates for illustration only and are not financial advice. Actual rates, fees and rounding differ between lenders and banks.</p>
+    </div>
+  </footer>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script src="math.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
