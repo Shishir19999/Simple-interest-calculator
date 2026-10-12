@@ -1,7 +1,6 @@
-'use strict';
-const test = require('node:test');
-const assert = require('node:assert/strict');
-const M = require('../math.js');
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import * as M from '../src/lib/finmath.js';
 
 const close = (a, b, eps = 0.01) =>
   assert.ok(Math.abs(a - b) <= eps, `expected ${a} to be within ${eps} of ${b}`);

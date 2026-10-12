@@ -27,7 +27,7 @@
   --danger: #b91c1c;
   --danger-soft: #fde8e8;
   --focus: #1d4ed8;
-  --c1: #1d4ed8; --c2: #b45309; --c3: #047857;
+  --c1: #1d4ed8; --c2: #b45309; --c3: #047857; --c4: #be185d; --c5: #7c3aed; --c6: #0e7490;
   --grid: #e2e8f0;
   --shadow: 0 1px 2px rgba(15, 23, 42, .06), 0 8px 24px rgba(15, 23, 42, .06);
   --hero-1: #dbe6ff; --hero-2: #f4f6fb;
@@ -49,7 +49,7 @@
   --danger: #ff8a8a;
   --danger-soft: #3a1a22;
   --focus: #93bcff;
-  --c1: #6ea8fe; --c2: #fbbf24; --c3: #34d399;
+  --c1: #6ea8fe; --c2: #fbbf24; --c3: #34d399; --c4: #f472b6; --c5: #a78bfa; --c6: #22d3ee;
   --grid: #243050;
   --shadow: 0 1px 2px rgba(0, 0, 0, .4), 0 8px 24px rgba(0, 0, 0, .35);
   --hero-1: #16275a; --hero-2: #0b1020;
@@ -133,7 +133,8 @@ main:focus, [role="tabpanel"]:focus { outline: none; }
 .lead { margin-top: var(--s-4); color: var(--muted); max-width: 52ch; font-size: var(--t-lg); }
 
 /* ---------- Tabs ---------- */
-main { padding-block: var(--s-5) var(--s-7); display: block; }
+main { display: block; min-height: 60vh; }
+.page, .home-body { padding-block: var(--s-5) var(--s-7); }
 .tabs-scroll { overflow-x: auto; margin-bottom: var(--s-5); scrollbar-width: thin; padding-bottom: 2px; }
 #tabs { display: flex; gap: var(--s-2); min-width: max-content; border-bottom: 2px solid var(--border); }
 .tab {
@@ -250,7 +251,7 @@ tbody tr:last-child td { border-bottom: 0; }
 @media print {
   :root, [data-theme="dark"] { --bg: #fff; --surface: #fff; --surface-2: #f2f2f2; --text: #000; --muted: #333; --border: #999; --grid: #ddd; --c1: #1d4ed8; --c2: #b45309; --c3: #047857; }
   body { background: #fff; }
-  .skip, .site-header .header-tools, .hero, #tabs, .tabs-scroll, .form-card, #panel .actions, .history, .toast, #error-box[hidden] { display: none !important; }
+  .skip, .site-header, .hero, .form-card .actions, .form-card .fields, .history, .toast, .crumb-row, .related, .site-footer .small, .keypad, .actions, .examples, .fn-row button, .graph-wrap + p { display: none !important; }
   .print-only { display: block; font-weight: 600; margin-bottom: var(--s-3); }
   .panel { display: block; }
   .card, .stat { box-shadow: none; break-inside: avoid; }

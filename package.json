@@ -1,10 +1,25 @@
 {
   "name": "simple-interest-calculator",
-  "version": "2.0.0",
-  "description": "Finance toolkit: simple and compound interest, EMI, SIP and FD calculators.",
+  "version": "3.0.0",
+  "description": "Calculator hub: smart expression calculator, scientific, programmer, graphing, solvers, statistics, converters, finance, health and everyday calculators.",
   "private": true,
   "license": "MIT",
+  "type": "module",
   "scripts": {
-    "test": "node --test"
+    "dev": "vite --port 5510",
+    "build": "vite build",
+    "build:pages": "vite build --base=/Simple-interest-calculator/",
+    "preview": "vite preview --port 5511",
+    "test": "node --test",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "decimal.js": "^10.6.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.12.0",
+    "globals": "^17.13.0",
+    "vite": "^8.3.4"
   }
 }
